@@ -80,7 +80,12 @@ func (ps *PasswordFileStore) List() []string {
 }
 
 func (ps *PasswordFileStore) save() error {
-	f, err := os.Create("./pw")
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return err
+	}
+
+	f, err := os.Create(home + "/.pw")
 	if err != nil {
 		return err
 	}

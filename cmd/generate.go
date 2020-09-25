@@ -13,7 +13,7 @@ var generateCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var store password.PasswordStore
-		store = password.NewPasswordMemoryStore()
+		store = password.NewPasswordFileStore()
 
 		gp := password.Generate(password.GenerateOptions{})
 
