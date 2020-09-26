@@ -28,8 +28,7 @@ var generateCmd = &cobra.Command{
 	Aliases: []string{"gen"},
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		var store password.PasswordStore
-		store = password.NewPasswordFileStore()
+		store := password.NewPasswordJsonStore()
 
 		gp := password.Generate(password.GenerateOptions{
 			Digits:   digits,
@@ -38,7 +37,7 @@ var generateCmd = &cobra.Command{
 			Length:   length,
 		})
 
-		store.Set(args[0], gp)
+		store.Set(args[0], password.Account{"me@tomm.us", gp})
 
 		fmt.Println(gp)
 	},
